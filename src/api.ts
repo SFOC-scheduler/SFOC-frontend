@@ -3,8 +3,12 @@
 
 const Base_URL = `http://43.201.18.157`;
 
-export function fetchApi() {
-  return fetch(`${Base_URL}/actuator`).then((response) => response.json());
+export function fetchApi(token: string) {
+  return fetch(`${Base_URL}/actuator`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((response) => response.json());
 }
 
 // export function fetchCoinInfo(coinId: string) {

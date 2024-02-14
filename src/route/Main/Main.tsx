@@ -1,7 +1,13 @@
 import { useQuery } from "react-query";
 import styled from "styled-components";
-import { fetchApi } from "../api";
+import { fetchApi } from "../../api";
 import { useState } from "react";
+import Main_header from "./Main_Header";
+
+import home_icon from "../../resources/Icon/home_icon.png";
+import alarm_icon from "../../resources/Icon/alarm_icon.png";
+import openDown_icon from "../../resources/Icon/moveDown_icon.png";
+import settings_icon from "../../resources/Icon/settings_icon.png";
 
 const Container = styled.div`
   width: 100vw;
@@ -13,12 +19,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
-
-const Header = styled.div`
-  width: 100%;
-  height: 80px;
-  background-color: gray;
 `;
 
 const MainContainer = styled.div`
@@ -67,6 +67,7 @@ const Category = styled.div`
 
 const TaskContainer = styled.div``;
 
+//api 테스트
 interface IApi {
   _links: {
     self: {
@@ -81,8 +82,8 @@ interface IApi {
 }
 
 function Main() {
-  const { isLoading, data } = useQuery<IApi>("api", fetchApi);
-  console.log(data);
+  //const { isLoading, data } = useQuery<IApi>("api", fetchApi);
+  //console.log(data);
 
   const [isListOpen, setListOpen] = useState(false);
   const toggleList = () => {
@@ -91,13 +92,14 @@ function Main() {
 
   return (
     <Container>
-      <Header></Header>
+      <Main_header></Main_header>
       <MainContainer>
         <LeftPanel></LeftPanel>
         <MainArea>
           <Calendar></Calendar>
           <TaskContainer></TaskContainer>
         </MainArea>
+
         <RightPanel>
           <Category>
             <button onClick={toggleList}></button>

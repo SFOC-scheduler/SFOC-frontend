@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import main_img from "../resources/main_img.png";
 import logo_img from "../resources/logo_main.png";
@@ -36,7 +37,9 @@ function Welcome() {
   return (
     <Container>
       <MainImg imgSrc={main_img}>
-        <Logo src={logo_img} alt="logo_img"></Logo>
+        <Link to="/login">
+          <Logo src={logo_img} alt="logo_img"></Logo>
+        </Link>
       </MainImg>
     </Container>
   );
