@@ -3,11 +3,7 @@ import styled from "styled-components";
 import { fetchApi } from "../../api";
 import { useState } from "react";
 import Main_header from "./Main_Header";
-
-import home_icon from "../../resources/Icon/home_icon.png";
-import alarm_icon from "../../resources/Icon/alarm_icon.png";
-import openDown_icon from "../../resources/Icon/moveDown_icon.png";
-import settings_icon from "../../resources/Icon/settings_icon.png";
+import Alarm from "../PopUp/Alarm";
 
 const Container = styled.div`
   width: 100vw;
@@ -15,7 +11,7 @@ const Container = styled.div`
   max-width: 1920px;
   max-height: 1080px;
   margin: 0 auto;
-  background-color: rgb(236, 236, 237);
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -93,6 +89,7 @@ function Main() {
   return (
     <Container>
       <Main_header></Main_header>
+
       <MainContainer>
         <LeftPanel></LeftPanel>
         <MainArea>

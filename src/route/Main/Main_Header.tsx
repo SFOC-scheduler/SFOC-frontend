@@ -8,12 +8,14 @@ import alarm_icon from "../../resources/Icon/alarm_icon.png";
 import openDown_icon from "../../resources/Icon/moveDown_icon.png";
 import settings_icon from "../../resources/Icon/settings_icon.png";
 import { Link } from "react-router-dom";
+import Alarm from "../PopUp/Alarm";
+import TeamList from "../PopUp/TeamList";
 
 const Header = styled.div`
   position: relative;
   width: 100%;
   height: 80px;
-  background-color: gray;
+  background-color: #d9d9d9;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -44,7 +46,7 @@ const AlarmContainer = styled.div`
   margin-right: auto;
 `;
 
-const AlarmBtn = styled.button<BtnProps>`
+const AlarmBtn = styled.div<BtnProps>`
   width: 44px;
   height: 44px;
   background-image: url(${(props) => props.imgSrc});
@@ -68,6 +70,11 @@ const OpenBtn = styled.button<BtnProps>`
 
 const CurrentPageContainer = styled.div`
   position: absolute;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -104,18 +111,30 @@ const SettingsBtn = styled.button<BtnProps>`
 `;
 
 function Main_header() {
+  const [isAlarmOpen, setAlarmOpen] = useState(true);
+  const [isTeamOpen, setTeamOpen] = useState(true);
+
+  const toggleAlarm = () => {
+    setAlarmOpen(!isAlarmOpen);
+  };
+  const toggleTeam = () => {
+    setTeamOpen(!isTeamOpen);
+  };
+
   return (
     <Header>
       <Link to="/">
         <HomeBtn imgSrc={home_icon}></HomeBtn>
       </Link>
       <AlarmContainer>
+        {isAlarmOpen && <Alarm />}
         <AlarmBtn imgSrc={alarm_icon}></AlarmBtn>
-        <OpenBtn imgSrc={openDown_icon}></OpenBtn>
+        <OpenBtn imgSrc={openDown_icon} onClick={toggleAlarm}></OpenBtn>
       </AlarmContainer>
       <CurrentPageContainer>
+        {isTeamOpen && <TeamList />}
         my page
-        <OpenBtn imgSrc={openDown_icon}></OpenBtn>
+        <OpenBtn imgSrc={openDown_icon} onClick={toggleTeam}></OpenBtn>
       </CurrentPageContainer>
       <UserContainer>
         <UserImg></UserImg>
