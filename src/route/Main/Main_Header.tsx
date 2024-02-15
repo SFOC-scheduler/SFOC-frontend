@@ -111,8 +111,8 @@ const SettingsBtn = styled.button<BtnProps>`
 `;
 
 function Main_header() {
-  const [isAlarmOpen, setAlarmOpen] = useState(true);
-  const [isTeamOpen, setTeamOpen] = useState(true);
+  const [isAlarmOpen, setAlarmOpen] = useState(false);
+  const [isTeamOpen, setTeamOpen] = useState(false);
 
   const toggleAlarm = () => {
     setAlarmOpen(!isAlarmOpen);

@@ -4,6 +4,7 @@ import { fetchApi } from "../../api";
 import { useState } from "react";
 import Main_header from "./Main_Header";
 import Alarm from "../PopUp/Alarm";
+import Main_Calendar from "./Main_Calendar";
 
 const Container = styled.div`
   width: 100vw;
@@ -22,11 +23,15 @@ const MainContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 `;
 
-const MainArea = styled.div``;
-
-const Calendar = styled.div``;
+const MainArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
 
 const LeftPanel = styled.div`
   width: 380px;
@@ -38,7 +43,6 @@ const LeftPanel = styled.div`
 const RightPanel = styled.div`
   width: 380px;
   height: 100%;
-  margin-left: auto;
   padding: 30px;
   border-left: 1px solid black;
   display: flex;
@@ -93,7 +97,7 @@ function Main() {
       <MainContainer>
         <LeftPanel></LeftPanel>
         <MainArea>
-          <Calendar></Calendar>
+          <Main_Calendar></Main_Calendar>
           <TaskContainer></TaskContainer>
         </MainArea>
 
