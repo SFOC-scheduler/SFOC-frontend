@@ -5,7 +5,7 @@ import Main from "./route/Main/Main";
 
 function Router() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Switch>
         <Route exact path="/">
           <Welcome></Welcome>
