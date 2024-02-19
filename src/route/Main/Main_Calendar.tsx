@@ -2,33 +2,87 @@ import { DatesSetArg, EventContentArg } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
 import FullCalendar from "@fullcalendar/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 10px 0;
   width: 80%;
+  height: calc(100vh - 140px);
 `;
 
+const TaskContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; //높이 남은부분으로 설정
+  margin: 20px 60px 0 60px;
+  min-height: 200px;
+  background-color: #d9d9d9;
+`;
+
+const Task = styled.div``;
+
+//https://fullcalendar.io/docs#toc
 function Main_Calendar() {
+  const [events, setEvents] = useState([
+    {
+      id: "2024-02-09",
+      title: "설날 연휴",
+      start: "2024-02-09",
+      end: "2024-02-13",
+      allDay: true,
+    },
+    {
+      id: "2024-02-09",
+      title: "설날 연휴",
+      start: "2024-02-10",
+      end: "2024-02-11",
+      allDay: true,
+    },
+  ]);
+
+  const makeSchedule = () => {
+    alert("Clicked the custom button!");
+  };
+
+  function getEventsByDate(date: String) {
+    console.log(date);
+    console.log(events.filter((event) => event.start === date));
+    return events.filter((event) => event.start === date.toString());
+  }
+
+  const loadCurrentSchedule = (data: DateClickArg) => {
+    //task로 일정 로드
+    alert(getEventsByDate(data.dateStr));
+  };
+
   return (
     <Container>
       <FullCalendar
         height={600}
         locale="kr"
-        dateClick={function (data) {
-          alert(data.dateStr + " day has been clicked!");
-        }}
+        selectable={true}
+        dateClick={(data) => loadCurrentSchedule(data)}
         plugins={[dayGridPlugin, interactionPlugin]}
         headerToolbar={{
           left: "prev next",
-          right: "title",
+          center: "title",
+          right: "addBtn",
         }}
-        buttonIcons={{
-          prev: "chevron-left",
-          next: "chevron-right",
+        customButtons={{
+          addBtn: {
+            text: "+",
+            click: makeSchedule,
+          },
         }}
+        events={events}
       />
+      <TaskContainer>
+        <Task></Task>
+      </TaskContainer>
     </Container>
   );
 }

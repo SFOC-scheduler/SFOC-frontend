@@ -65,8 +65,6 @@ const Category = styled.div`
   }
 `;
 
-const TaskContainer = styled.div``;
-
 //api 테스트
 interface IApi {
   _links: {
@@ -98,7 +96,6 @@ function Main() {
         <LeftPanel></LeftPanel>
         <MainArea>
           <Main_Calendar></Main_Calendar>
-          <TaskContainer></TaskContainer>
         </MainArea>
 
         <RightPanel>
