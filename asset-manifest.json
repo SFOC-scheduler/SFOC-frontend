@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/SFOC-frontend/static/js/main.1026b161.js",
+    "static/media/main_img.png": "/SFOC-frontend/static/media/main_img.4e93946672c2266a69a2.png",
+    "index.html": "/SFOC-frontend/index.html",
+    "main.1026b161.js.map": "/SFOC-frontend/static/js/main.1026b161.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.1026b161.js"
+  ]
+}
