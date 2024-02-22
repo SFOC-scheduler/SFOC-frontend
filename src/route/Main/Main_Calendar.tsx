@@ -9,9 +9,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  margin: 10px 0;
+  padding: 10px 50px 0 50px;
   width: 80%;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 100px);
+  position: relative;
+  z-index: 0;
 `;
 
 const TaskContainer = styled.div`

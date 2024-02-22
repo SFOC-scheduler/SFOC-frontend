@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const AlarmBubble = styled.div`
   position: absolute;
+  z-index: 20;
   top: 90px;
   left: 120px;
   width: 400px;
@@ -31,7 +32,7 @@ const AlarmContainer = styled.div`
   padding: 2px 8px;
   margin: 5px 0;
   & p {
-    font-size: 16px;
+    font-size: 15px;
   }
 `;
 
@@ -42,16 +43,19 @@ const DeleteBtn = styled.button`
 `;
 
 function Alarm() {
+  const alarms = [
+    { team: "xxx팀", user: "ooo님" },
+    { team: "yyy팀", user: "ppp님" },
+    { team: "ooo팀", user: "xxx님" },
+  ];
   return (
     <AlarmBubble>
-      <AlarmContainer>
-        <p>xxx팀에서 ooo님이 알림을 추가했습니다</p>
-        <DeleteBtn>지우기</DeleteBtn>
-      </AlarmContainer>
-      <AlarmContainer>
-        <p>xxx팀에서 ooo님이 알림을 추가했습니다</p>
-        <DeleteBtn>지우기</DeleteBtn>
-      </AlarmContainer>
+      {alarms.map((alarm, index) => (
+        <AlarmContainer key={index}>
+          <p>{`${alarm.team}에서 ${alarm.user}이(가) 알림을 추가했습니다`}</p>
+          <DeleteBtn>지우기</DeleteBtn>
+        </AlarmContainer>
+      ))}
     </AlarmBubble>
   );
 }

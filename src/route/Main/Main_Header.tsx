@@ -7,7 +7,7 @@ import home_icon from "../../resources/Icon/home_icon.png";
 import alarm_icon from "../../resources/Icon/alarm_icon.png";
 import openDown_icon from "../../resources/Icon/moveDown_icon.png";
 import settings_icon from "../../resources/Icon/settings_icon.png";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useParams } from "react-router-dom";
 import Alarm from "../PopUp/Alarm";
 import TeamList from "../PopUp/TeamList";
 
@@ -78,6 +78,7 @@ const CurrentPageContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 20;
 `;
 
 const UserContainer = styled.div`
@@ -110,9 +111,22 @@ const SettingsBtn = styled.button<BtnProps>`
   background-color: transparent;
 `;
 
+interface Params {
+  teamName?: string; // 파라미터가 존재하지 않는 경우를 대비하여 optional로 설정
+}
+
 function Main_header() {
   const [isAlarmOpen, setAlarmOpen] = useState(false);
   const [isTeamOpen, setTeamOpen] = useState(false);
+
+  const teams = [
+    { id: 0, name: "mypage" },
+    { id: 1, name: "Team B" },
+    { id: 2, name: "Team C" },
+  ];
+
+  const { teamName } = useParams<Params>();
+  console.log(teamName);
 
   const toggleAlarm = () => {
     setAlarmOpen(!isAlarmOpen);
@@ -120,6 +134,12 @@ function Main_header() {
   const toggleTeam = () => {
     setTeamOpen(!isTeamOpen);
   };
+  const isValidTeamName = teams.some((team) => team.name === teamName);
+
+  if (!isValidTeamName) {
+    // 유효하지 않은 팀 이름이면 다른 페이지로 리디렉션
+    return <Redirect to="/" />;
+  }
 
   return (
     <Header>
@@ -132,8 +152,8 @@ function Main_header() {
         <OpenBtn imgSrc={openDown_icon} onClick={toggleAlarm}></OpenBtn>
       </AlarmContainer>
       <CurrentPageContainer>
-        {isTeamOpen && <TeamList />}
-        my page
+        {isTeamOpen && <TeamList teams={teams} />}
+        {teamName || "mypage"}
         <OpenBtn imgSrc={openDown_icon} onClick={toggleTeam}></OpenBtn>
       </CurrentPageContainer>
       <UserContainer>

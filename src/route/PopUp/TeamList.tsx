@@ -1,12 +1,13 @@
+import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
 
 const TeamContainer = styled.div`
   position: absolute;
+  z-index: 20;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
   border: 0;
-  border-radius: 5px;
 `;
 
 const TeamBtn = styled.button`
@@ -16,11 +17,23 @@ const TeamBtn = styled.button`
   margin-top: 1px;
 `;
 
-function TeamList() {
+interface Team {
+  id: number;
+  name: string;
+}
+
+interface TeamListProps {
+  teams: Team[];
+}
+
+function TeamList({ teams }: TeamListProps) {
   return (
     <TeamContainer>
-      <TeamBtn>team1</TeamBtn>
-      <TeamBtn>team2</TeamBtn>
+      {teams.map((team) => (
+        <Link key={team.id} to={`/main/${team.name}`}>
+          <TeamBtn>{team.name}</TeamBtn>
+        </Link>
+      ))}
     </TeamContainer>
   );
 }

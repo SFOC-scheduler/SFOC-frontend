@@ -2,6 +2,7 @@ import { Switch, BrowserRouter, Route } from "react-router-dom";
 import Welcome from "./route/Welcome";
 import Login from "./route/Login";
 import Main from "./route/Main/Main";
+import NotFound from "./route/NotFound";
 
 function Router() {
   return (
@@ -13,7 +14,7 @@ function Router() {
         <Route path="/login">
           <Login></Login>
         </Route>
-        <Route path="/main">
+        <Route path="/main/:teamName" component={Main}>
           <Main></Main>
         </Route>
       </Switch>

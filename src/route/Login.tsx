@@ -92,6 +92,8 @@ const StyledLink = styled(Link)`
   justify-content: center;
 `;
 
+const teamName = "mypage";
+
 function Login() {
   const location = useLocation();
   const history = useHistory();
@@ -102,7 +104,7 @@ function Login() {
     console.log(token);
 
     if (token) {
-      history.push("/main");
+      history.push(`/main/${teamName}`);
     }
   }, [location.search, history]);
 
@@ -123,7 +125,7 @@ function Login() {
             >
               Google
             </SocialBtn>
-            <StyledLink to="/main">
+            <StyledLink to={`/main/${teamName}`}>
               <SocialBtn
                 as="a"
                 href="https://dev.sfoc.kro.kr/oauth2/authorization/kakao"
