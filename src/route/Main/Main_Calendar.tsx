@@ -57,8 +57,7 @@ function Main_Calendar() {
   }
 
   const loadCurrentSchedule = (data: DateClickArg) => {
-    //task로 일정 로드
-    alert(getEventsByDate(data.dateStr));
+    console.log(data.dateStr);
   };
 
   return (

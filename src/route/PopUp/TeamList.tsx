@@ -24,18 +24,23 @@ interface Team {
 
 interface TeamListProps {
   teams: Team[];
+  toggleTeam: () => void;
 }
 
-function TeamList({ teams }: TeamListProps) {
+function TeamList({ teams, toggleTeam }: TeamListProps) {
+  // 팀 목록을 클릭했을 때 팀 메뉴를 열기 위한 클릭 핸들러
+  const handleTeamClick = () => {
+    toggleTeam();
+  };
+
   return (
     <TeamContainer>
       {teams.map((team) => (
-        <Link key={team.id} to={`/main/${team.name}`}>
+        <Link key={team.id} to={`/main/${team.name}`} onClick={handleTeamClick}>
           <TeamBtn>{team.name}</TeamBtn>
         </Link>
       ))}
     </TeamContainer>
   );
 }
-
 export default TeamList;

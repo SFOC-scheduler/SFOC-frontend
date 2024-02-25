@@ -126,7 +126,6 @@ function Main_header() {
   ];
 
   const { teamName } = useParams<Params>();
-  console.log(teamName);
 
   const toggleAlarm = () => {
     setAlarmOpen(!isAlarmOpen);
@@ -152,7 +151,7 @@ function Main_header() {
         <OpenBtn imgSrc={openDown_icon} onClick={toggleAlarm}></OpenBtn>
       </AlarmContainer>
       <CurrentPageContainer>
-        {isTeamOpen && <TeamList teams={teams} />}
+        {isTeamOpen && <TeamList teams={teams} toggleTeam={toggleTeam} />}
         {teamName || "mypage"}
         <OpenBtn imgSrc={openDown_icon} onClick={toggleTeam}></OpenBtn>
       </CurrentPageContainer>
