@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fullcalendar/core": "^6.1.10",
-    "@fullcalendar/daygrid": "^6.1.10",
-    "@fullcalendar/interaction": "^6.1.10",
-    "@fullcalendar/react": "^6.1.10",
+    "@fullcalendar/core": "^6.1.11",
+    "@fullcalendar/daygrid": "^6.1.11",
+    "@fullcalendar/interaction": "^6.1.11",
+    "@fullcalendar/react": "^6.1.11",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -15,10 +15,12 @@
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "react": "^18.2.0",
+    "react-datepicker": "^6.1.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.1",
+    "react-time-picker": "^6.6.0",
     "styled-components": "^6.1.8",
     "web-vitals": "^2.1.4"
   },
@@ -50,6 +52,7 @@
   },
   "homepage": "https://sfoc-scheduler.github.io/SFOC-frontend/",
   "devDependencies": {
+    "@types/react-datepicker": "^6.0.1",
     "@types/react-router-dom": "^5.3.3",
     "gh-pages": "^6.1.1",
     "typescript": "^5.3.3"

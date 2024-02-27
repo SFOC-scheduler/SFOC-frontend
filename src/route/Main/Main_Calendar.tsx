@@ -47,7 +47,7 @@ function Main_Calendar() {
   ]);
 
   const makeSchedule = () => {
-    alert("Clicked the custom button!");
+    //open makeSchedule popup
   };
 
   function getEventsByDate(date: String) {
@@ -63,8 +63,8 @@ function Main_Calendar() {
   return (
     <Container>
       <FullCalendar
-        height={600}
         locale="kr"
+        height={600}
         selectable={true}
         dateClick={(data) => loadCurrentSchedule(data)}
         plugins={[dayGridPlugin, interactionPlugin]}

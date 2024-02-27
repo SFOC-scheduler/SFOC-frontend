@@ -6,6 +6,8 @@ import Main_header from "./Main_Header";
 import Main_Calendar from "./Main_Calendar";
 import Main_LeftPanel from "./Main_LeftPanel";
 import Main_RightPanel from "./Main_RightPanel";
+import { useParams } from "react-router-dom";
+import MakeSchedule from "../PopUp/MakeSchedule";
 
 const Container = styled.div`
   width: 100vw;
@@ -17,6 +19,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  filter: blur(4px);
 `;
 
 const MainContainer = styled.div`
@@ -40,20 +43,29 @@ interface IApi {
   };
 }
 
+interface Params {
+  teamName?: string;
+}
+
 function Main() {
+  let { teamName } = useParams<Params>(); //현제 팀 가져오기
+
   //const { isLoading, data } = useQuery<IApi>("api", fetchApi);
   //console.log(data);
 
   return (
-    <Container>
-      <Main_header></Main_header>
+    <div>
+      <Container>
+        <Main_header></Main_header>
 
-      <MainContainer>
-        <Main_LeftPanel></Main_LeftPanel>
-        <Main_Calendar></Main_Calendar>
-        <Main_RightPanel></Main_RightPanel>
-      </MainContainer>
-    </Container>
+        <MainContainer>
+          <Main_LeftPanel></Main_LeftPanel>
+          <Main_Calendar></Main_Calendar>
+          <Main_RightPanel></Main_RightPanel>
+        </MainContainer>
+      </Container>
+      <MakeSchedule></MakeSchedule>
+    </div>
   );
 }
 
