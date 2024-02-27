@@ -8,8 +8,14 @@ import Main_LeftPanel from "./Main_LeftPanel";
 import Main_RightPanel from "./Main_RightPanel";
 import { useParams } from "react-router-dom";
 import MakeSchedule from "../PopUp/MakeSchedule";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { makeSchedule } from "../PopUp/PopupState";
 
-const Container = styled.div`
+interface ContainerProps {
+  isBlurred: boolean;
+}
+
+const Container = styled.div<ContainerProps>`
   width: 100vw;
   height: 100vh;
   max-width: 1920px;
@@ -19,7 +25,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  filter: blur(4px);
+  ${({ isBlurred }) => isBlurred && "filter: blur(4px);"}
 `;
 
 const MainContainer = styled.div`
@@ -49,13 +55,14 @@ interface Params {
 
 function Main() {
   let { teamName } = useParams<Params>(); //현제 팀 가져오기
+  const isScheduleOpen = useRecoilValue(makeSchedule);
 
   //const { isLoading, data } = useQuery<IApi>("api", fetchApi);
   //console.log(data);
 
   return (
     <div>
-      <Container>
+      <Container isBlurred={isScheduleOpen}>
         <Main_header></Main_header>
 
         <MainContainer>
@@ -64,7 +71,7 @@ function Main() {
           <Main_RightPanel></Main_RightPanel>
         </MainContainer>
       </Container>
-      <MakeSchedule></MakeSchedule>
+      {isScheduleOpen && <MakeSchedule />}
     </div>
   );
 }

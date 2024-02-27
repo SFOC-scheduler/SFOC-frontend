@@ -3,7 +3,9 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
 import FullCalendar from "@fullcalendar/react";
 import { useRef, useState } from "react";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { makeSchedule } from "../PopUp/PopupState";
 
 const Container = styled.div`
   display: flex;
@@ -46,8 +48,10 @@ function Main_Calendar() {
     },
   ]);
 
-  const makeSchedule = () => {
+  const setScheduleOpen = useSetRecoilState(makeSchedule);
+  const addSchedule = () => {
     //open makeSchedule popup
+    setScheduleOpen(true);
   };
 
   function getEventsByDate(date: String) {
@@ -76,7 +80,7 @@ function Main_Calendar() {
         customButtons={{
           addBtn: {
             text: "+",
-            click: makeSchedule,
+            click: addSchedule,
           },
         }}
         events={events}

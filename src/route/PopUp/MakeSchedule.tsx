@@ -3,6 +3,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from "react-time-picker";
 import { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { makeSchedule } from "./PopupState";
 
 const Container = styled.div`
   position: fixed;
@@ -137,6 +139,12 @@ function MakeSchedule() {
     .toString()
     .padStart(2, "0")}:${endTime.getMinutes().toString().padStart(2, "0")}`;
 
+  const setScheduleOpen = useSetRecoilState(makeSchedule);
+  const closeSchedule = () => {
+    //open makeSchedule popup
+    setScheduleOpen(false);
+  };
+
   return (
     <Container>
       <Popup>
@@ -196,7 +204,7 @@ function MakeSchedule() {
           </Details>
         </Popup_Main>
         <Popup_Footer>
-          <ConfirmBtn>저장</ConfirmBtn>
+          <ConfirmBtn onClick={closeSchedule}>저장</ConfirmBtn>
         </Popup_Footer>
       </Popup>
     </Container>
