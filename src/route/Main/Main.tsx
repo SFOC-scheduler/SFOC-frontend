@@ -9,7 +9,14 @@ import Main_RightPanel from "./Main_RightPanel";
 import { useParams } from "react-router-dom";
 import MakeSchedule from "../PopUp/MakeSchedule";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { makeSchedule } from "../PopUp/PopupState";
+import {
+  makeSchedule,
+  makeTeam,
+  popupOpen,
+  settingTeam,
+} from "../PopUp/PopupState";
+import MakeTeam from "../PopUp/MakeTeam";
+import TeamSettings from "../PopUp/TeamSettings";
 
 interface ContainerProps {
   isBlurred: boolean;
@@ -55,14 +62,17 @@ interface Params {
 
 function Main() {
   let { teamName } = useParams<Params>(); //현제 팀 가져오기
+  const isPopupOpen = useRecoilValue(popupOpen);
   const isScheduleOpen = useRecoilValue(makeSchedule);
+  const isTeamOpen = useRecoilValue(makeTeam);
+  const isSettingOpen = useRecoilValue(settingTeam);
 
   //const { isLoading, data } = useQuery<IApi>("api", fetchApi);
   //console.log(data);
 
   return (
     <div>
-      <Container isBlurred={isScheduleOpen}>
+      <Container isBlurred={isPopupOpen}>
         <Main_header></Main_header>
 
         <MainContainer>
@@ -72,6 +82,8 @@ function Main() {
         </MainContainer>
       </Container>
       {isScheduleOpen && <MakeSchedule />}
+      {isTeamOpen && <MakeTeam />}
+      {isSettingOpen && <TeamSettings />}
     </div>
   );
 }

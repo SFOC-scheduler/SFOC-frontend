@@ -1,4 +1,6 @@
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { settingTeam } from "./PopupState";
 
 const Container = styled.div`
   position: fixed;
@@ -17,7 +19,8 @@ const Popup = styled.div`
   position: absolute;
   background-color: white;
   width: 550px;
-  height: 250px;
+  min-height: 600px;
+  height: auto;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -59,6 +62,15 @@ const Check = styled.input`
   margin-left: auto;
 `;
 
+const ListContainer = styled.div`
+  width: 90%;
+  height: 100px;
+  margin: 10px;
+  padding: 0 10px;
+`;
+
+const ListItem = styled.div``;
+
 const Popup_Footer = styled.div`
   width: 90%;
   display: flex;
@@ -85,7 +97,24 @@ const ConfirmBtn = styled.button`
   margin: 10px 20px 0 0;
 `;
 
-function MakeTeam() {
+function TeamSettings() {
+  const setSettingsOpen = useSetRecoilState(settingTeam);
+  const confirmSetting = () => {
+    setSettingsOpen(false);
+  };
+  const members = [
+    {
+      name: "김창휘",
+      manager: true,
+      middle: false,
+    },
+  ];
+  const applicant = [
+    {
+      name: "전현민",
+      email: "hhh",
+    },
+  ];
   return (
     <Container>
       <Popup>
@@ -112,13 +141,20 @@ function MakeTeam() {
             비공개
           </CheackContainer>
         </Details>
+        <ListContainer>
+          구성원 목록
+          {members.map((element) => (
+            <ListItem>{element.name}</ListItem>
+          ))}
+        </ListContainer>
+        <ListContainer>신청자 목록</ListContainer>
         <Popup_Footer>
           <CancelBtn>취소</CancelBtn>
-          <ConfirmBtn>생성</ConfirmBtn>
+          <ConfirmBtn onClick={confirmSetting}>완료</ConfirmBtn>
         </Popup_Footer>
       </Popup>
     </Container>
   );
 }
 
-export default MakeTeam;
+export default TeamSettings;

@@ -104,6 +104,7 @@ function Login() {
     console.log(token);
 
     if (token) {
+      localStorage.setItem("token", token);
       history.push(`/main/${teamName}`);
     }
   }, [location.search, history]);

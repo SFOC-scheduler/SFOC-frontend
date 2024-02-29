@@ -10,6 +10,9 @@ import settings_icon from "../../resources/Icon/settings_icon.png";
 import { Link, Redirect, useParams } from "react-router-dom";
 import Alarm from "../PopUp/Alarm";
 import TeamList from "../PopUp/TeamList";
+import { useSetRecoilState } from "recoil";
+import TeamSettings from "../PopUp/TeamSettings";
+import { settingTeam } from "../PopUp/PopupState";
 
 const Header = styled.div`
   position: relative;
@@ -135,6 +138,12 @@ function Main_header() {
   };
   const isValidTeamName = teams.some((team) => team.name === teamName);
 
+  const setTeamSettingsOpen = useSetRecoilState(settingTeam);
+  const OpenSettings = () => {
+    //open makeSchedule popup
+    setTeamSettingsOpen(true);
+  };
+
   if (!isValidTeamName) {
     // 유효하지 않은 팀 이름이면 다른 페이지로 리디렉션
     return <Redirect to="/" />;
@@ -159,7 +168,7 @@ function Main_header() {
         <UserImg></UserImg>
         <OpenBtn imgSrc={openDown_icon}></OpenBtn>
       </UserContainer>
-      <SettingsBtn imgSrc={settings_icon}></SettingsBtn>
+      <SettingsBtn imgSrc={settings_icon} onClick={OpenSettings}></SettingsBtn>
     </Header>
   );
 }
