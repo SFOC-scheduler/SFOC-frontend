@@ -1,11 +1,14 @@
 {
   "files": {
-    "main.js": "/SFOC-frontend/static/js/main.4d45dbfb.js",
+    "main.css": "/SFOC-frontend/static/css/main.2cb918f2.css",
+    "main.js": "/SFOC-frontend/static/js/main.e31b2304.js",
     "static/media/main_img.png": "/SFOC-frontend/static/media/main_img.4e93946672c2266a69a2.png",
     "index.html": "/SFOC-frontend/index.html",
-    "main.4d45dbfb.js.map": "/SFOC-frontend/static/js/main.4d45dbfb.js.map"
+    "main.2cb918f2.css.map": "/SFOC-frontend/static/css/main.2cb918f2.css.map",
+    "main.e31b2304.js.map": "/SFOC-frontend/static/js/main.e31b2304.js.map"
   },
   "entrypoints": [
-    "static/js/main.4d45dbfb.js"
+    "static/css/main.2cb918f2.css",
+    "static/js/main.e31b2304.js"
   ]
 }
