@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import main_img from "../resources/main_img.png";
 import logo_img from "../resources/logo_main.png";
+import { useEffect } from "react";
 
 const Container = styled.div`
   max-width: 1920px;
@@ -34,6 +35,20 @@ const Logo = styled.img`
 `;
 
 function Welcome() {
+  const location = useLocation();
+  const history = useHistory();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const token = params.get("token");
+    console.log(token);
+
+    if (token) {
+      localStorage.setItem("token", token);
+      history.push(`/main/mypage`);
+    }
+  }, [location.search, history]);
+
   return (
     <Container>
       <MainImg imgSrc={main_img}>
