@@ -45,11 +45,12 @@ const ListContainer = styled.div`
 `;
 
 function Main_RightPanel() {
-  const categories = [
+  const [categories, setCategories] = useState([
     {
       id: 1,
       name: "카테고리 1",
       items: ["List Item 1", "List Item 2", "List Item 3"],
+      active: false,
     },
     {
       id: 2,
@@ -61,30 +62,42 @@ function Main_RightPanel() {
         "List Item 7",
         "List Item 8",
       ],
+      active: false,
     },
     {
       id: 3,
       name: "카테고리 3",
       items: ["List Item 7", "List Item 8"],
+      active: false,
     },
-  ];
+  ]);
 
-  const [openCategoryIndex, setOpenCategoryIndex] = useState<number | null>(
-    null
-  );
-
-  const toggleCategory = (index: number) => {
-    setOpenCategoryIndex((prevIndex) => (prevIndex === index ? null : index));
+  const toggleCategory = (categoryId: number) => {
+    setCategories(
+      categories.map((category) => {
+        if (category.id === categoryId) {
+          return {
+            ...category,
+            active: !category.active, // 카테고리의 활성화 상태 토글
+          };
+        }
+        return category;
+      })
+    );
   };
 
   return (
     <RightPanel>
-      {categories.map((category, index) => (
+      {categories.map((category) => (
         <Category key={category.id}>
-          <Category_Header onClick={() => toggleCategory(index)}>
+          <Category_Header
+            onClick={() => {
+              toggleCategory(category.id);
+            }}
+          >
             {category.name}
           </Category_Header>
-          {openCategoryIndex === index && (
+          {category.active && (
             <ListContainer>
               {category.items.map((item, itemIndex) => (
                 <p key={itemIndex}>{item}</p>

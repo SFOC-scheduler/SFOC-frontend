@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const AlarmBubble = styled.div`
@@ -43,20 +44,36 @@ const DeleteBtn = styled.button`
 `;
 
 function Alarm() {
-  const alarms = [
-    { team: "xxx팀", user: "ooo님" },
-    { team: "yyy팀", user: "ppp님" },
-    { team: "ooo팀", user: "xxx님" },
-  ];
+  const [alarms, setAlarms] = useState([
+    { id: 1, team: "xxx팀", user: "ooo님" },
+    { id: 2, team: "yyy팀", user: "ppp님" },
+    { id: 3, team: "ooo팀", user: "xxx님" },
+  ]);
+
+  const handleDelete = (id: number) => {
+    // 삭제 버튼을 누른 알람을 제외한 나머지 알람들을 유지하도록 새로운 배열을 만듭니다.
+    const updatedAlarms = alarms.filter((alarm) => alarm.id !== id);
+    setAlarms(updatedAlarms);
+  };
   return (
-    <AlarmBubble>
-      {alarms.map((alarm, index) => (
-        <AlarmContainer key={index}>
-          <p>{`${alarm.team}에서 ${alarm.user}이(가) 알림을 추가했습니다`}</p>
-          <DeleteBtn>지우기</DeleteBtn>
-        </AlarmContainer>
-      ))}
-    </AlarmBubble>
+    <div>
+      {alarms.length === 0 ? (
+        <AlarmBubble style={{ textAlign: "center" }}>
+          알람이 없습니다.
+        </AlarmBubble>
+      ) : (
+        <AlarmBubble>
+          {alarms.map((alarm) => (
+            <AlarmContainer key={alarm.id}>
+              <p>{`${alarm.team}에서 ${alarm.user}이(가) 알림을 추가했습니다`}</p>
+              <DeleteBtn onClick={() => handleDelete(alarm.id)}>
+                지우기
+              </DeleteBtn>
+            </AlarmContainer>
+          ))}
+        </AlarmBubble>
+      )}
+    </div>
   );
 }
 

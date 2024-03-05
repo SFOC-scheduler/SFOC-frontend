@@ -1,6 +1,7 @@
 import { useSetRecoilState } from "recoil";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { settingTeam } from "./PopupState";
+import { ChangeEvent, useState } from "react";
 
 const Container = styled.div`
   position: fixed;
@@ -31,7 +32,7 @@ const Popup = styled.div`
 
 const Details = styled.div`
   width: 90%;
-  height: 50px;
+  height: auto;
   margin: 10px;
   display: flex;
   flex-direction: row;
@@ -64,12 +65,48 @@ const Check = styled.input`
 
 const ListContainer = styled.div`
   width: 90%;
-  height: 100px;
+  height: 150px;
   margin: 10px;
   padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 `;
 
-const ListItem = styled.div``;
+const ListTitle = styled.div`
+  margin-right: auto;
+`;
+
+const ListItem = styled.div`
+  width: 100%;
+  min-height: 40px;
+  margin: 2px 0;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+interface BtnProps {
+  middle?: boolean | null;
+}
+const Btn = styled.button<BtnProps>`
+  width: auto;
+  min-width: 60px;
+  height: 30px;
+  background-color: #d9d9d9;
+  border: 1px solid gray;
+  border-radius: 20px;
+  margin: 0 5px;
+  ${({ middle }) =>
+    middle &&
+    css`
+      opacity: 0.5; /* 투명도를 50%로 설정 */
+      pointer-events: none; /* 클릭 불가능하도록 설정 */
+    `}
+`;
 
 const Popup_Footer = styled.div`
   width: 90%;
@@ -102,29 +139,80 @@ function TeamSettings() {
   const confirmSetting = () => {
     setSettingsOpen(false);
   };
+  const closeSetting = () => {
+    setSettingsOpen(false);
+  };
+  interface TeamSettings {
+    name: string;
+    explanation: string;
+    isPublic: string;
+  }
+  const TeamSettings: TeamSettings = {
+    name: "팀이름",
+    explanation: "팀설명",
+    isPublic: "public",
+  };
   const members = [
     {
       name: "김창휘",
       manager: true,
       middle: false,
     },
+    {
+      name: "중간관리자",
+      manager: false,
+      middle: true,
+    },
+    {
+      name: "중간관리자",
+      manager: false,
+      middle: true,
+    },
+    {
+      name: "중간관리자",
+      manager: false,
+      middle: true,
+    },
+    {
+      name: "중간관리자",
+      manager: false,
+      middle: true,
+    },
   ];
   const applicant = [
     {
-      name: "전현민",
-      email: "hhh",
+      name: "한승연",
+      email: "hanstom000608@gmail.com",
     },
   ];
+
+  const [teamName, setTeamName] = useState(TeamSettings.name);
+  const [explanation, setExplanation] = useState(TeamSettings.explanation);
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setTeamName(event.target.value); // input 값이 변경될 때마다 eventName 상태를 업데이트
+  };
+  const handleExpChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setExplanation(event.target.value); // input 값이 변경될 때마다 eventName 상태를 업데이트
+  };
+  const acceptApplicant = () => {};
+  const regectApplicant = () => {};
+
   return (
     <Container>
       <Popup>
         <Details>
           팀 이름
-          <InputDetails></InputDetails>
+          <InputDetails
+            value={teamName}
+            onChange={handleNameChange}
+          ></InputDetails>
         </Details>
         <Details>
           설명
-          <InputDetails></InputDetails>
+          <InputDetails
+            value={explanation}
+            onChange={handleExpChange}
+          ></InputDetails>
         </Details>
         <Details>
           공개 범위
@@ -141,15 +229,32 @@ function TeamSettings() {
             비공개
           </CheackContainer>
         </Details>
+        <Details style={{ margin: "0px" }}>구성원 목록</Details>
         <ListContainer>
-          구성원 목록
           {members.map((element) => (
-            <ListItem>{element.name}</ListItem>
+            <ListItem>
+              {element.name}
+              <Btn style={{ marginLeft: "auto" }}>관리자 위임</Btn>
+              <Btn middle={element.middle}>중간관리자 임명</Btn>
+              <Btn>내보내기</Btn>
+            </ListItem>
           ))}
         </ListContainer>
-        <ListContainer>신청자 목록</ListContainer>
+        <Details style={{ margin: "0px" }}>신청자 목록</Details>
+        <ListContainer>
+          {applicant.map((element) => (
+            <ListItem>
+              <p style={{ marginRight: "5px" }}>{element.name}</p>
+              <p style={{ fontSize: "14px" }}>{element.email}</p>
+              <Btn style={{ marginLeft: "auto" }} onClick={acceptApplicant}>
+                수락
+              </Btn>
+              <Btn onClick={regectApplicant}>거절</Btn>
+            </ListItem>
+          ))}
+        </ListContainer>
         <Popup_Footer>
-          <CancelBtn>취소</CancelBtn>
+          <CancelBtn onClick={closeSetting}>취소</CancelBtn>
           <ConfirmBtn onClick={confirmSetting}>완료</ConfirmBtn>
         </Popup_Footer>
       </Popup>
