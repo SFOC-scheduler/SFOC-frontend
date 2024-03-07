@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import styled from "styled-components";
-import { fetchApi } from "../../api";
-import { useState } from "react";
+import { fetchApi, fetchUserApi } from "../../api";
+import { useEffect, useState } from "react";
 import Main_header from "./Main_Header";
 import Main_Calendar from "./Main_Calendar";
 import Main_LeftPanel from "./Main_LeftPanel";
@@ -60,12 +60,24 @@ interface Params {
   teamName?: string;
 }
 
+interface UserInfo {
+  id: number;
+  role: string;
+}
+
 function Main() {
   let { teamName } = useParams<Params>(); //현제 팀 가져오기
   const isPopupOpen = useRecoilValue(popupOpen);
   const isScheduleOpen = useRecoilValue(makeSchedule);
   const isTeamOpen = useRecoilValue(makeTeam);
   const isSettingOpen = useRecoilValue(settingTeam);
+
+  const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   if (token) {
+  //     fetchUserApi(token);
+  //   }
+  // }, []);
 
   //const { isLoading, data } = useQuery<IApi>("api", fetchApi);
   //console.log(data);

@@ -152,6 +152,11 @@ function TeamSettings() {
     explanation: "팀설명",
     isPublic: "public",
   };
+  const userInfo = {
+    name: "사용자",
+    manager: false,
+    middle: true,
+  };
   const members = [
     {
       name: "김창휘",
@@ -233,9 +238,11 @@ function TeamSettings() {
         <ListContainer>
           {members.map((element) => (
             <ListItem>
-              {element.name}
-              <Btn style={{ marginLeft: "auto" }}>관리자 위임</Btn>
-              <Btn middle={element.middle}>중간관리자 임명</Btn>
+              <p style={{ marginRight: "auto" }}>{element.name}</p>
+              {!userInfo.middle && <Btn>관리자 위임</Btn>}
+              {!userInfo.middle && (
+                <Btn middle={element.middle}>중간관리자 임명</Btn>
+              )}
               <Btn>내보내기</Btn>
             </ListItem>
           ))}

@@ -22,12 +22,35 @@ const TaskContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1; //높이 남은부분으로 설정
-  margin: 20px 60px 0 60px;
   min-height: 200px;
+  margin: 20px 60px 0 60px;
+  padding: 20px 30px;
   background-color: #d9d9d9;
 `;
 
-const Task = styled.div``;
+const Task = styled.div`
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+interface CategoryColorProps {
+  color: string;
+}
+const CategoryColor = styled.div<CategoryColorProps>`
+  background-color: ${(props) => props.color};
+  height: 90%;
+  width: 8px;
+  margin-right: 10px;
+`;
+const Check = styled.input`
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+`;
+const Dday = styled.div`
+  margin-left: auto;
+`;
 
 //https://fullcalendar.io/docs#toc
 function Main_Calendar() {
@@ -73,7 +96,7 @@ function Main_Calendar() {
         dateClick={(data) => loadCurrentSchedule(data)}
         plugins={[dayGridPlugin, interactionPlugin]}
         headerToolbar={{
-          left: "prev next",
+          left: "prev,next",
           center: "title",
           right: "addBtn",
         }}
@@ -86,7 +109,14 @@ function Main_Calendar() {
         events={events}
       />
       <TaskContainer>
-        <Task></Task>
+        <Task>
+          <CategoryColor color={"#E3C1C1"} />
+          일정 1<Check type={"checkbox"}></Check>
+        </Task>
+        <Task>
+          <CategoryColor color={"tomato"} />
+          일정 2<Dday>D-112</Dday>
+        </Task>
       </TaskContainer>
     </Container>
   );
