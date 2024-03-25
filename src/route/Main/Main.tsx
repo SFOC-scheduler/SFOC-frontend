@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import styled from "styled-components";
-import { fetchApi, fetchUserApi } from "../../api";
+import { fetchUserApi } from "../../api";
 import { useEffect, useState } from "react";
 import Main_header from "./Main_Header";
 import Main_Calendar from "./Main_Calendar";
@@ -73,11 +73,12 @@ function Main() {
   const isSettingOpen = useRecoilValue(settingTeam);
 
   const token = localStorage.getItem("token");
-  // useEffect(() => {
-  //   if (token) {
-  //     fetchUserApi(token);
-  //   }
-  // }, []);
+
+  useEffect(() => {
+    if (token) {
+      fetchUserApi(token);
+    }
+  }, []);
 
   //const { isLoading, data } = useQuery<IApi>("api", fetchApi);
   //console.log(data);

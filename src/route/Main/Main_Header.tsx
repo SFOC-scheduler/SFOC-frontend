@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import styled from "styled-components";
-import { fetchApi } from "../../api";
 import { useState } from "react";
 
 import home_icon from "../../resources/Icon/home_icon.png";
